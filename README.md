@@ -3,6 +3,8 @@ Após rodar o back-end do projeto com o container do Docker rodando.
 Rodar os comandos na pasta raiz:
 
 ```
+git clone https://github.com/FillipeCO/organizy-frontend.git
+
 npm install
 
 npm start
