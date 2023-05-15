@@ -1,0 +1,39 @@
+
+.component {
+  width: 300px;
+  margin: 5vh auto 80px auto;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  }
+  
+  .component h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .component h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .component button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .component button:hover {
+    background-color: #45a049;
+  }
+  
+  

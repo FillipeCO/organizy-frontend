@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
-import { calcularDiferençaEntreReceitasEDespesas } from "./functions/HomeFunctions";
+import "./Home.css";
+import Footer from "./Footer";
 
 const Home = () => {
   const [user, setUser] = useState([]);
@@ -88,14 +88,12 @@ const Home = () => {
   const pegarApenasDespesas = () => {
     var despesas = [];
     financialReleases.forEach((financialRelease) => {
-        if (financialRelease.type === "despesa") {
-            despesas.push(financialRelease);
-        }
+      if (financialRelease.type === "despesa") {
+        despesas.push(financialRelease);
+      }
     });
     return despesas;
-    };
-
-
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -121,32 +119,40 @@ const Home = () => {
         setFinancialReleases(response.data);
         setReceitas(calcularReceitas());
         setDespesas(calcularDespesas());
-
       } catch (error) {
         console.log(error);
       }
     };
 
     const fetchFinancialBalance = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3333/financial-releases/balance/${localStorage.getItem("userId")}`);
-            setSaldo(response.data.balance);
-        } catch (error) {
-            console.log(error);
-        }
+      try {
+        const response = await axios.get(
+          `http://localhost:3333/financial-releases/balance/${localStorage.getItem(
+            "userId"
+          )}`
+        );
+        setSaldo(response.data.balance);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const fetchMonthlyBalance = async () => {
-        console.log('MESATUAL', pegaMesAtual()); 
-        try {
-            const response = await axios.post(`http://localhost:3333/financial-release/monthly-balance/${localStorage.getItem("userId")}`, {
-                month : pegaMesAtual(),
-                year : 2023
-            });
-            setBalancoMensal(response.data.balance);
-        } catch (error) {
-            console.log(error);
-        }
+      console.log("MESATUAL", pegaMesAtual());
+      try {
+        const response = await axios.post(
+          `http://localhost:3333/financial-release/monthly-balance/${localStorage.getItem(
+            "userId"
+          )}`,
+          {
+            month: pegaMesAtual(),
+            year: 2023,
+          }
+        );
+        setBalancoMensal(response.data.balance);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchFinancialBalance();
@@ -157,59 +163,80 @@ const Home = () => {
     setLoading(false);
   }, []);
 
-    const filtrarReceitasPeloMesAtualESomaOValorDelas = () => {
-        const receitasMesAtual = financialReleases.filter((financialRelease) => {
-          if (
-            financialRelease.type === "receita" &&
-            new Date(financialRelease.date).getMonth() === new Date().getMonth()
-          ) { 
-            return financialRelease.value;
-          }
-        });
-        return receitasMesAtual.reduce((acc, cur) => acc + cur.value, 0);
-      };
+  const filtrarReceitasPeloMesAtualESomaOValorDelas = () => {
+    const receitasMesAtual = financialReleases.filter((financialRelease) => {
+      if (
+        financialRelease.type === "receita" &&
+        new Date(financialRelease.date).getMonth() === new Date().getMonth()
+      ) {
+        return financialRelease.value;
+      }
+    });
+    return receitasMesAtual.reduce((acc, cur) => acc + cur.value, 0);
+  };
 
-      const filtrarDespesasPeloMesAtualESomaOValorDelas = () => {
-        const despesasMesAtual = financialReleases.filter((financialRelease) => {
-          if (
-            financialRelease.type === "despesa" &&
-            new Date(financialRelease.date).getMonth() === new Date().getMonth()
-          ) { 
-            return financialRelease.value;
-          }
-        });
-        return despesasMesAtual.reduce((acc, cur) => acc + cur.value, 0);
-      };
-
+  const filtrarDespesasPeloMesAtualESomaOValorDelas = () => {
+    const despesasMesAtual = financialReleases.filter((financialRelease) => {
+      if (
+        financialRelease.type === "despesa" &&
+        new Date(financialRelease.date).getMonth() === new Date().getMonth()
+      ) {
+        return financialRelease.value;
+      }
+    });
+    return despesasMesAtual.reduce((acc, cur) => acc + cur.value, 0);
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="telaInicial">
+    <div className="container">
+      {/* <header className="App-header">
         <h1>Organizy</h1>
-        <p>Olá, {user.name}!</p>
-        <p>{pegarNomeDoMesAtual()}</p>
+      </header> */}
 
+      <div className="nomeUsuario">
+        <p>Olá, {user.name}!</p>
+      </div>
+
+      <div className="nomeMesAtual">
+        <h1>{pegarNomeDoMesAtual()}</h1>
+      </div>
+
+      <div className="saldoReceitasDespesas">
         {loading && <p>Carregando...</p>}
         {!loading && <p>Saldo atual em conta: {saldo}</p>}
-        {!loading && <p>Receitas: {filtrarReceitasPeloMesAtualESomaOValorDelas()}</p>}
-        {!loading && <p>Despesas: {filtrarDespesasPeloMesAtualESomaOValorDelas()}</p>}
+        {!loading && (
+          <p>Receitas: {filtrarReceitasPeloMesAtualESomaOValorDelas()}</p>
+        )}
+        {!loading && (
+          <p>Despesas: {filtrarDespesasPeloMesAtualESomaOValorDelas()}</p>
+        )}
+      </div>
+
+      <div className="despesasPorCategoria">
         {!loading && <p>Despesas por categoria:</p>}
         {!loading && (
           <ul>
             {pegarApenasDespesas().map((financialRelease) => (
-                <li key={financialRelease.id}>
-                    {financialRelease.category} - {financialRelease.value}
-                </li>
+              <li key={financialRelease.id}>
+                {financialRelease.category} - {financialRelease.value}
+              </li>
             ))}
-            </ul>
+          </ul>
         )}
+      </div>
 
+      <div className="balancoMensal">
         {!loading && <p>Balanço mensal: {balancoMensal}</p>}
-        {!loading && <p>Receitas: {filtrarReceitasPeloMesAtualESomaOValorDelas()}</p>}
-        {!loading && <p>Despesas: {filtrarDespesasPeloMesAtualESomaOValorDelas()}</p>}
-        
-             
-      </header>
+        {!loading && (
+          <p>Receitas: {filtrarReceitasPeloMesAtualESomaOValorDelas()}</p>
+        )}
+        {!loading && (
+          <p>Despesas: {filtrarDespesasPeloMesAtualESomaOValorDelas()}</p>
+        )}
+      </div>
+    <Footer />
+    </div>
     </div>
   );
 };

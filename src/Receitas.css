@@ -1,0 +1,73 @@
+
+.component {
+  margin-bottom: 370px;
+    padding: 20px;
+    background-color: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: Arial, sans-serif;
+  }
+  
+  .component h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .component ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .component li {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+  }
+  
+  .component li h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .component li p {
+    margin: 0;
+  }
+  
+  .component form div {
+    margin-bottom: 10px;
+  }
+  
+  .component label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .component input[type="text"],
+  .component input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .component button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  /* Footer styles */
+  .footer {
+    padding: 10px;
+    text-align: center;
+    background-color: #f5f5f5;
+    font-size: 12px;
+    color: #666;
+  }
+  

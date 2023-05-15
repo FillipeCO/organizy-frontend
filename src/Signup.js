@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
+import './Signup.css';
 
 
 const Signup = () => {
@@ -62,40 +63,95 @@ const Signup = () => {
 
     return (
         <div className="Signup">
-            <header className="Signup-header">
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Nome:
-                        <input type="text" name="name" value={name} onChange={handleNameChange} />
-                    </label>
-                    <label>
-                        Celular:
-                        <input type="text" name="cellphone" value={cellphone} onChange={handleCellphoneChange} />
-                    </label>
-                    <label>
-                        Data de nascimento:
-                        <input type="text" name="birthdate" value={birthdate} onChange={handleBirthdateChange} />
-                    </label>
-                    <label>
-                        CPF:
-                        <input type="text" name="cpf" value={cpf} onChange={handleCpfChange} />
-                    </label>
-                    <label>
-                        CEP:
-                        <input type="text" name="cep" value={cep} onChange={handleCepChange} />
-                    </label>
-                    <label>
-                        Estado:
-                        <input type="text" name="state" value={state} onChange={handleStateChange} />
-                    </label>
-                    <label>
-                        Cidade:
-                        <input type="text" name="city" value={city} onChange={handleCityChange} />
-                    </label>
-                    <input type="submit" value="Cadastrar" />
-                </form>
-            </header>
+            <header className="Signup-header"></header>
+
+
+<div class="container">
+
+    <form className="form" onSubmit={handleSubmit}>
+
+        <h1>Faça seu cadastro</h1>
+
+        <div class="input-control">
+
+            <label for="username">Nome Completo</label>
+
+            <input id="username" name="username" type="text" onChange={handleNameChange}></input>
+
+            <div class="error"></div>
+
         </div>
+
+        <div class="input-control">
+
+            <label for="cpf">CPF</label>
+
+            <input id="cpf" name="cpf" type="number" onChange={handleCpfChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <div class="input-control">
+
+            <label for="nascimento">Data de nascimento</label>
+
+            <input id="nascimento" name="nascimento" type="date" onChange={handleBirthdateChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <div class="input-control">
+
+            <label for="telefone">Telefone</label>
+
+            <input id="telefone" name="telefone" type="number" onChange={handleCellphoneChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <div class="input-control">
+
+            <label for="cep">CEP</label>
+
+            <input id="cep" name="cep" type="number" onChange={handleCepChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <div class="input-control">
+
+            <label for="estado">Estado</label>
+
+            <input id="estado" name="estado" type="text" onChange={handleStateChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <div class="input-control">
+
+            <label for="estado">Cidade</label>
+
+            <input id="cidade" name="cidade" type="text" onChange={handleCityChange}></input>
+
+            <div class="error"></div>
+
+        </div>
+
+        <button className='button' type="submit">Cadastrar</button>
+
+    </form>
+
+</div>
+
+</div>
+
+
+
     );
 }
 
